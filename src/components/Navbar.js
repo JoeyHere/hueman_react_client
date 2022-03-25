@@ -3,7 +3,7 @@ import { Menu, Image } from "semantic-ui-react"
 import { NavLink } from "react-router-dom"
 
 export default class Navbar extends Component {
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
@@ -13,26 +13,26 @@ export default class Navbar extends Component {
           size={"small"}
           // stackable={true}
           id="navBar"
-          widths={5}
+          widths={4}
           tabular
           borderless
         >
           <Menu.Item
-            style={{ maxWidth: "230px", height: "40px", marginTop: "8px" }}
+            style={{ height: "40px", marginTop: "8px" }}
             color={"green"}
             name="PLAY"
             as={NavLink}
             to="/levels"
           />
           <Menu.Item
-            style={{ maxWidth: "230px", height: "40px", marginTop: "8px" }}
+            style={{ height: "40px", marginTop: "8px" }}
             color={"blue"}
             icon={!this.props.currentUser ? "lock" : null}
             name="CREATE"
             as={NavLink}
             to="/create"
           />
-          <Image
+          {/* <Image
             className={"huePhoneLogo"}
             style={{
               margin: "10px",
@@ -57,12 +57,12 @@ export default class Navbar extends Component {
             style={{
               marginRight: "20px",
               marginLeft: "20px",
-              width: "150px",
-              height: "40px",
-              margin: "4px",
+              width: "28px",
+              height: "28px",
+              margin: "10px",
               padding: "0px"
             }}
-            src="https://i.ibb.co/TKnsHvk/logo-final.png"
+            src="https://i.ibb.co/HF4Jm1K/hmframe3.png"
           />
           <Image
             className={"hueLogo"}
@@ -72,9 +72,9 @@ export default class Navbar extends Component {
               height: "28px"
             }}
             src="https://i.ibb.co/fHMm8Rw/brown.png"
-          />
+          /> */}
           <Menu.Item
-            style={{ maxWidth: "230px", height: "40px", marginTop: "8px" }}
+            style={{ height: "40px", marginTop: "8px" }}
             color={"orange"}
             name={"MY LEVELS"}
             icon={!this.props.currentUser ? "lock" : null}
@@ -84,7 +84,7 @@ export default class Navbar extends Component {
           {this.props.currentUser ? (
             <>
               <Menu.Item
-                style={{ maxWidth: "230px", height: "40px", marginTop: "8px" }}
+                style={{ height: "40px", marginTop: "8px" }}
                 name="LOG-OUT"
                 onClick={this.props.logOut}
               >
@@ -98,7 +98,7 @@ export default class Navbar extends Component {
           ) : (
             <>
               <Menu.Item
-                style={{ maxWidth: "230px", height: "40px", marginTop: "8px" }}
+                style={{ height: "40px", marginTop: "8px" }}
                 color={"red"}
                 name={"LOG IN"}
                 as={NavLink}

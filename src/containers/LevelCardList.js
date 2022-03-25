@@ -17,11 +17,7 @@ class LevelCardList extends React.Component {
           itemsPerRow={4}
           centered={true}
           style={{
-            marginLeft: "auto",
-            marginRight: "auto",
             marginTop: "0px",
-            paddingRight: "10%",
-            paddingLeft: "10%",
             width: "auto"
           }}
         >

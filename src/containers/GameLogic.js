@@ -1,119 +1,59 @@
-import { BLOCKS } from "../concerns/Config.js"
+import { BLOCKS, COMBINEHASH, SAMEHASH } from "../concerns/Config.js"
 
 export const isSameBlock = (blockA, blockB) => {
-  if (blockA === blockB) {
-    return true
-  }
-  if (blockA === BLOCKS.green && blockB === BLOCKS.combineGreen) {
-    return true
-  }
-  if (blockA === BLOCKS.combineGreen && blockB === BLOCKS.green) {
-    return true
-  }
-  if (blockA === BLOCKS.purple && blockB === BLOCKS.combinePurple) {
-    return true
-  }
-  if (blockA === BLOCKS.combinePurple && blockB === BLOCKS.purple) {
-    return true
-  }
-  if (blockA === BLOCKS.orange && blockB === BLOCKS.combineOrange) {
-    return true
-  }
-  if (blockA === BLOCKS.combineOrange && blockB === BLOCKS.orange) {
-    return true
-  }
+  if (blockA === blockB) return true
+  if (SAMEHASH[blockA] === blockB) return true
   return false
 }
 
 export const blocksCanCombine = (blockA, blockB) => {
-  if (blockA === BLOCKS.floor || blockB === BLOCKS.floor) {
-    return false
-  }
-  if (blockA === BLOCKS.wall || blockB === BLOCKS.wall) {
-    return false
-  }
-  if (blockA === BLOCKS.yellow && blockB === BLOCKS.blue) {
-    return BLOCKS.combineGreen
-  }
-  if (blockA === BLOCKS.blue && blockB === BLOCKS.yellow) {
-    return BLOCKS.combineGreen
-  }
-  if (blockA === BLOCKS.yellow && blockB === BLOCKS.red) {
-    return BLOCKS.combineOrange
-  }
-  if (blockA === BLOCKS.red && blockB === BLOCKS.yellow) {
-    return BLOCKS.combineOrange
-  }
-  if (blockA === BLOCKS.red && blockB === BLOCKS.blue) {
-    return BLOCKS.combinePurple
-  }
-  if (blockA === BLOCKS.blue && blockB === BLOCKS.red) {
-    return BLOCKS.combinePurple
-  }
-  if (blockA === BLOCKS.bomb && blockB !== BLOCKS.wall) {
-    return BLOCKS.explode
-  }
-  if (blockA !== BLOCKS.wall && blockB === BLOCKS.bomb) {
-    return BLOCKS.explode
-  }
+  let combined = COMBINEHASH[blockA]?.[blockB]
+  if (combined) return combined
   return false
 }
 
 export const removeFlashBlocks = array => {
   let newArray = array.map(row =>
     row.map(block => {
-      if (block === BLOCKS.flash) {
-        return BLOCKS.floor
+      let newBlock
+      switch (block) {
+        case BLOCKS.combineGreen:
+          newBlock = SAMEHASH[block]
+          break
+        case BLOCKS.combineOrange:
+          newBlock = SAMEHASH[block]
+          break
+        case BLOCKS.combinePurple:
+          newBlock = SAMEHASH[block]
+          break
+        case BLOCKS.explode:
+          newBlock = BLOCKS.floor
+          break
+        case BLOCKS.flash:
+          newBlock = BLOCKS.floor
+          break
+        default:
+          newBlock = block
       }
-      if (block === BLOCKS.explode) {
-        return BLOCKS.floor
-      }
-      if (block === BLOCKS.combineGreen) {
-        return BLOCKS.green
-      }
-      if (block === BLOCKS.combineOrange) {
-        return BLOCKS.orange
-      }
-      if (block === BLOCKS.combinePurple) {
-        return BLOCKS.purple
-      }
-      return block
+      return newBlock
     })
   )
   return newArray
 }
 
-export const getBlockFromBoard = (x, y, array) => array[y][x]
-
-export const checkBlockExists = (x, y, array) => array[y] && array[y][x]
+export const getBlockFromBoard = (x, y, array) => array[y]?.[x]
 
 export const checkArrayForThrees = inputArray => {
   let threesArray = inputArray.map((row, yi, array) => {
     return row.map((block, i) => {
-      let prevBlock = checkBlockExists(i - 1, yi, array)
-        ? getBlockFromBoard(i - 1, yi, array)
-        : undefined
-      let prevPrevBlock = checkBlockExists(i - 2, yi, array)
-        ? getBlockFromBoard(i - 2, yi, array)
-        : undefined
-      let nextBlock = checkBlockExists(i + 1, yi, array)
-        ? getBlockFromBoard(i + 1, yi, array)
-        : undefined
-      let nextNextBlock = checkBlockExists(i + 2, yi, array)
-        ? getBlockFromBoard(i + 2, yi, array)
-        : undefined
-      let downBlock = checkBlockExists(i, yi + 1, array)
-        ? getBlockFromBoard(i, yi + 1, array)
-        : undefined
-      let downDownBlock = checkBlockExists(i, yi + 2, array)
-        ? getBlockFromBoard(i, yi + 2, array)
-        : undefined
-      let upBlock = checkBlockExists(i, yi - 1, array)
-        ? getBlockFromBoard(i, yi - 1, array)
-        : undefined
-      let upUpBlock = checkBlockExists(i, yi - 2, array)
-        ? getBlockFromBoard(i, yi - 2, array)
-        : undefined
+      let prevBlock = getBlockFromBoard(i - 1, yi, array)
+      let prevPrevBlock = getBlockFromBoard(i - 2, yi, array)
+      let nextBlock = getBlockFromBoard(i + 1, yi, array)
+      let nextNextBlock = getBlockFromBoard(i + 2, yi, array)
+      let downBlock = getBlockFromBoard(i, yi + 1, array)
+      let downDownBlock = getBlockFromBoard(i, yi + 2, array)
+      let upBlock = getBlockFromBoard(i, yi - 1, array)
+      let upUpBlock = getBlockFromBoard(i, yi - 2, array)
       if (block === BLOCKS.wall) return false
       if (block === BLOCKS.floor) return false
       if (block === BLOCKS.brown) return false
@@ -159,7 +99,7 @@ export const getMovingBlocks = (
     dx: newBlock.x - oldBlock.x,
     dy: newBlock.y - oldBlock.y
   }
-  if (!checkBlockExists(newBlock.x, newBlock.y, board)) return false
+  if (!getBlockFromBoard(newBlock.x, newBlock.y, board)) return false
   if (getBlockFromBoard(newBlock.x, newBlock.y, board) === BLOCKS.wall)
     return false
   if (
@@ -182,10 +122,10 @@ export const combineBlocks = (
 ) => {
   let blockB = { x: blockA.x + dx, y: blockA.y + dy }
 
-  if (!checkBlockExists(blockA.x, blockA.y, inputArray)) {
+  if (!getBlockFromBoard(blockA.x, blockA.y, inputArray)) {
     return false
   }
-  if (!checkBlockExists(blockB.x, blockB.y, inputArray)) {
+  if (!getBlockFromBoard(blockB.x, blockB.y, inputArray)) {
     return false
   }
   if (getBlockFromBoard(blockA.x, blockA.y, inputArray) === BLOCKS.wall) {

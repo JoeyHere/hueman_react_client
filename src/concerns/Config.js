@@ -17,6 +17,52 @@ export const BLOCKS = {
   explode: 16
 }
 
+export const SAMEHASH = {
+  [`${BLOCKS.green}`]: BLOCKS.combineGreen,
+  [`${BLOCKS.purple}`]: BLOCKS.combinePurple,
+  [`${BLOCKS.orange}`]: BLOCKS.combineOrange,
+  [`${BLOCKS.combineGreen}`]: BLOCKS.green,
+  [`${BLOCKS.combineOrange}`]: BLOCKS.orange,
+  [`${BLOCKS.combinePurple}`]: BLOCKS.purple
+}
+
+export const COMBINEHASH = {
+  [`${BLOCKS.red}`]: {
+    [`${BLOCKS.blue}`]: BLOCKS.combinePurple,
+    [`${BLOCKS.yellow}`]: BLOCKS.combineOrange,
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.blue}`]: {
+    [`${BLOCKS.red}`]: BLOCKS.combinePurple,
+    [`${BLOCKS.yellow}`]: BLOCKS.combineGreen,
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.yellow}`]: {
+    [`${BLOCKS.red}`]: BLOCKS.combineOrange,
+    [`${BLOCKS.blue}`]: BLOCKS.combineGreen,
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.green}`]: {
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.orange}`]: {
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.purple}`]: {
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  },
+  [`${BLOCKS.bomb}`]: {
+    [`${BLOCKS.red}`]: BLOCKS.explode,
+    [`${BLOCKS.blue}`]: BLOCKS.explode,
+    [`${BLOCKS.yellow}`]: BLOCKS.explode,
+    [`${BLOCKS.green}`]: BLOCKS.explode,
+    [`${BLOCKS.purple}`]: BLOCKS.explode,
+    [`${BLOCKS.orange}`]: BLOCKS.explode,
+    [`${BLOCKS.wall}`]: BLOCKS.explode,
+    [`${BLOCKS.bomb}`]: BLOCKS.explode
+  }
+}
+
 export const BLOCKCLASSES = {
   [`${BLOCKS.player}`]: "playerBlock",
   [`${BLOCKS.red}`]: "redBlock",

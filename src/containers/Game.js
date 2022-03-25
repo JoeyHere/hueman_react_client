@@ -11,13 +11,13 @@ import DeleteModal from "../components/DeleteModal.js"
 import RulesModal from "../components/RulesModal.js"
 import {
   removeFlashBlocks,
-  checkBlockExists,
   moveBlocks,
   getMovingBlocks,
   combineBlocks,
   updatePlayerOnBoard,
   getPlayerPositionFromBoard,
-  clearBoardOfThrees
+  clearBoardOfThrees,
+  getBlockFromBoard
 } from "./GameLogic"
 
 export default class Game extends React.Component {
@@ -161,7 +161,7 @@ export default class Game extends React.Component {
       x: this.state.playerPosition.x + dx,
       y: this.state.playerPosition.y + dy
     }
-    if (!checkBlockExists(newBlock.x, newBlock.y, currentBoard)) {
+    if (!getBlockFromBoard(newBlock.x, newBlock.y, currentBoard)) {
       this.winGame()
     }
     let movingBlocks = getMovingBlocks(

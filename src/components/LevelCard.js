@@ -8,9 +8,8 @@ class LevelCard extends React.Component {
     let firstPixel = BLOCKCOLORS[gameBoard[0][0]]
     gameBoard.forEach((row, ri) =>
       row.forEach((block, ci) => {
-        generatedBoxShadow += `${ci * pixelSize}px ${ri * pixelSize}px 0 0 ${
-          BLOCKCOLORS[block]
-        }, `
+        generatedBoxShadow += `${ci * pixelSize}px ${ri * pixelSize}px 0 0 ${BLOCKCOLORS[block]
+          }, `
       })
     )
     generatedBoxShadow = generatedBoxShadow.slice(0, -2)
@@ -94,7 +93,7 @@ class LevelCard extends React.Component {
           width: "270px",
           minWidth: "270px",
           height: "182px",
-          margin: "25px"
+          margin: "2px"
           // boxShadow: "0px 0px 10px grey"
         }}
       >

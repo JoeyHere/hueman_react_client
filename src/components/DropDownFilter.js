@@ -5,32 +5,27 @@ const difficultyOptions = [
   {
     key: "All",
     text: "All",
-    value: "All",
-    image: { src: "https://i.ibb.co/nsm8vdz/blue.png" }
+    value: "All"
   },
   {
     key: "Hard",
     text: "Hard",
-    value: "Hard",
-    image: { src: "https://i.ibb.co/jy9RVy8/bombf3.png" }
+    value: "Hard"
   },
   {
     key: "Easy",
     text: "Easy",
-    value: "Easy",
-    image: { src: "https://i.ibb.co/ZLVxh9P/yellow.png" }
+    value: "Easy"
   },
   {
     key: "HUEman",
     text: "HUEman",
-    value: "HUEman",
-    image: { src: "https://i.ibb.co/t49MPMt/hmframe1.png" }
+    value: "HUEman"
   },
   {
     key: "Tutorial",
     text: "Tutorial",
-    value: "Tutorial",
-    image: { src: "https://i.ibb.co/fHMm8Rw/brown.png" }
+    value: "Tutorial"
   }
 ]
 
@@ -38,14 +33,12 @@ const sortOptions = [
   {
     key: "New",
     text: "New",
-    value: "New",
-    image: { src: "https://i.ibb.co/whWk5bg/purple.png" }
+    value: "New"
   },
   {
     key: "Popular",
     text: "Popular 🔥",
-    value: "Popular",
-    image: { src: "https://i.ibb.co/WByw4cs/orange.png" }
+    value: "Popular"
   }
 ]
 

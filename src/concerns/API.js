@@ -1,6 +1,6 @@
 const getBaseEndpoint = () => {
   return process.env.NODE_ENV === "development"
-    ? "http://localhost:3000/"
+    ? "https://api.playhueman.com"
     : "https://api.playhueman.com"
 }
 

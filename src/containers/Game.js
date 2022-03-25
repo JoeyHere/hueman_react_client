@@ -477,8 +477,8 @@ export default class Game extends React.Component {
                 onClick={this.muteGame}
               />
               {this.state.creator_id &&
-              this.props.currentUser &&
-              this.state.creator_id === this.props.currentUser.id ? (
+                this.props.currentUser &&
+                this.state.creator_id === this.props.currentUser.id ? (
                 <DeleteModal
                   style={{ width: 100 + "px" }}
                   handleDelete={this.handleDelete}

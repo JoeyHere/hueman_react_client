@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "node-sass": "^7.0.0",
-    "react": "^16.10.2",
+    "fomantic-ui": "^2.8.8",
+    "fomantic-ui-css": "^2.8.8",
+    "node-sass": "^7.0.1",
+    "react": "^17.0.2",
     "react-dom": "^16.10.2",
     "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "react-sound": "^1.2.0",
-    "semantic-ui": "^2.4.2",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +31,8 @@
   ],
   "engines": {
     "node": "10.15.3"
+  },
+  "devDependencies": {
+    "sass": "^1.49.9"
   }
 }
